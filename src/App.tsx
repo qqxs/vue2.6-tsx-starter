@@ -1,5 +1,5 @@
-import { Vue, Component } from "vue-property-decorator";
-import "./App.scss";
+import { Vue, Component } from 'vue-property-decorator'
+import './App.scss'
 @Component
 export default class App extends Vue {
   render() {
@@ -11,6 +11,6 @@ export default class App extends Vue {
         </div>
         <router-view />
       </div>
-    );
+    )
   }
 }

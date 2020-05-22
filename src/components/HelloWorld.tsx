@@ -1,9 +1,9 @@
-import { Vue, Component, Prop } from "vue-property-decorator";
-import "./index.scss";
+import { Vue, Component, Prop } from 'vue-property-decorator'
+import './index.scss'
 
 @Component
 export default class HelloWorld extends Vue {
-  @Prop({ type: String }) private msg!: string;
+  @Prop({ type: String }) private msg!: string
 
   render() {
     return (
@@ -144,6 +144,6 @@ export default class HelloWorld extends Vue {
           </li>
         </ul>
       </div>
-    );
+    )
   }
 }
