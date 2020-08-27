@@ -1,14 +1,80 @@
-import { Vue, Component, Prop } from 'vue-property-decorator'
+import {
+  Component,
+  Prop,
+  Model,
+  Watch,
+  // Inject,
+  Provide,
+  Emit
+} from 'vue-property-decorator'
 import './index.scss'
 
+import { VueComponent } from '../vue-ts-component'
+
+interface AProps {
+  href: string
+  title: string
+}
+
+// const symbol = Symbol('baz')
 @Component
-export default class HelloWorld extends Vue {
-  @Prop({ type: String }) private msg!: string
+export default class HelloWorld extends VueComponent<AProps> {
+  // @Inject() readonly ifoos!: string
+  // @Inject('bar') readonly bar!: string
+  // @Inject({ from: 'optional', default: 'default' }) readonly optional!: string
+  // @Inject(symbol) readonly ibaz!: string
+
+  @Provide() foo = 'foo'
+  @Provide('bar') baz = 'bar'
+
+  @Prop({ type: String }) private href!: string
+  @Prop({ type: String }) private msgs!: string
+  @Prop({ type: String }) private title?: string
+
+  @Model('change', { type: Boolean }) readonly checked!: boolean
+
+  @Watch('child')
+  onChildChanged(val: string, oldVal: string) {
+    console.log(val, oldVal)
+  }
+
+  list = [{ name: 1 }, { name: 2 }]
+
+  count = 0
+
+  msg = 'Welcome to Your Vue.js App'
+
+  html = `<p>this is p </p>`
+
+  @Emit('click')
+  addToCount(n: number) {
+    this.count += n
+    console.log(this.count)
+  }
+
+  mounted() {
+    this.getInputField().select()
+
+    console.log(this)
+  }
+
+  private getInputField() {
+    return this.$refs.input as HTMLInputElement
+  }
 
   render() {
     return (
       <div class="hello">
-        <h1>{this.msg}</h1>
+        <h1 onClick={() => this.addToCount(2)}>{this.msg}</h1>
+        <input
+          type="text"
+          placeholder="Type a message"
+          onInput={(e: any) => (this.msg = e.target.value)}
+          style={{ width: '100%' }}
+          ref="input"
+          value={this.msg}
+        />
+        {(this.$slots as any).default}
         <p>
           For a guide and recipes on how to configure / customize this project,
           <br />
@@ -18,7 +84,15 @@ export default class HelloWorld extends Vue {
           </a>
           .
         </p>
-        <h3>Installed CLI Plugins</h3>
+        <div domPropsInnerHTML={this.html}></div>
+        <transition name="fade">
+          <h3>Installed CLI Plugins</h3>
+        </transition>
+        <ul v-show={this.list.length}>
+          {this.list.map((item: any) => (
+            <li>{item.name}</li>
+          ))}
+        </ul>
         <ul>
           <li>
             <a

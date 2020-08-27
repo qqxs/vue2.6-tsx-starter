@@ -11,7 +11,16 @@ export default class Home extends Vue {
     return (
       <div class="home">
         <img alt="Vue logo" src={logoImg} />
-        <v-hello-world msg="Welcome to Your Vue.js App"></v-hello-world>
+        <v-hello-world
+          msg="Welcome to Your Vue.js App"
+          onClick={() => {
+            console.log(123412)
+          }}
+        >
+          1234123
+          <header slot="header">header</header>
+          <footer slot="footer">footer</footer>
+        </v-hello-world>
       </div>
     )
   }
