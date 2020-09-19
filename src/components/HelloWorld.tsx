@@ -28,7 +28,7 @@ export default class HelloWorld extends VueComponent<AProps> {
   @Provide('bar') baz = 'bar'
 
   @Prop({ type: String }) private href!: string
-  @Prop({ type: String }) private msgs!: string
+  @Prop({ type: String }) private msg!: string
   @Prop({ type: String }) private title?: string
 
   @Model('change', { type: Boolean }) readonly checked!: boolean
@@ -42,8 +42,6 @@ export default class HelloWorld extends VueComponent<AProps> {
 
   count = 0
 
-  msg = 'Welcome to Your Vue.js App'
-
   html = `<p>this is p </p>`
 
   @Emit('click')
@@ -54,8 +52,7 @@ export default class HelloWorld extends VueComponent<AProps> {
 
   mounted() {
     this.getInputField().select()
-
-    console.log(this)
+    // console.log(this)
   }
 
   private getInputField() {
