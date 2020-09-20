@@ -30,6 +30,7 @@ export default class HelloWorld extends VueComponent<AProps> {
   @Prop({ type: String }) private href!: string
   @Prop({ type: String }) private msg!: string
   @Prop({ type: String }) private title?: string
+  @Prop({ type: String }) private slot?: any
 
   @Model('change', { type: Boolean }) readonly checked!: boolean
 
@@ -42,7 +43,11 @@ export default class HelloWorld extends VueComponent<AProps> {
 
   count = 0
 
-  html = `<p>this is p </p>`
+  stateMsg = this.msg
+
+  html = `<p>this is html  p tag </p>`
+
+  message = ''
 
   @Emit('click')
   addToCount(n: number) {
@@ -52,7 +57,7 @@ export default class HelloWorld extends VueComponent<AProps> {
 
   mounted() {
     this.getInputField().select()
-    // console.log(this)
+    console.log(this)
   }
 
   private getInputField() {
@@ -62,16 +67,24 @@ export default class HelloWorld extends VueComponent<AProps> {
   render() {
     return (
       <div class="hello">
-        <h1 onClick={() => this.addToCount(2)}>{this.msg}</h1>
+        <h1 onClick={() => this.addToCount(2)}>{this.stateMsg}</h1>
+        {/* 双向绑定 */}
         <input
           type="text"
           placeholder="Type a message"
-          onInput={(e: any) => (this.msg = e.target.value)}
+          onInput={(e: any) => (this.stateMsg = e.target.value)}
           style={{ width: '100%' }}
           ref="input"
-          value={this.msg}
+          value={this.stateMsg}
         />
-        {(this.$slots as any).default}
+        <div>
+          <div>solt</div>
+          <div>{(this.$slots as any).default}</div>
+          <div>{(this.$slots as any).header}</div>
+          <div>{(this.$slots as any).footer}</div>
+        </div>
+
+        <p>Message is: {this.message}</p>
         <p>
           For a guide and recipes on how to configure / customize this project,
           <br />
@@ -90,130 +103,9 @@ export default class HelloWorld extends VueComponent<AProps> {
             <li>{item.name}</li>
           ))}
         </ul>
-        <ul>
-          <li>
-            <a
-              href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel"
-              target="_blank"
-              rel="noopener"
-            >
-              babel
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-typescript"
-              target="_blank"
-              rel="noopener"
-            >
-              typescript
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-router"
-              target="_blank"
-              rel="noopener"
-            >
-              router
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-vuex"
-              target="_blank"
-              rel="noopener"
-            >
-              vuex
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint"
-              target="_blank"
-              rel="noopener"
-            >
-              eslint
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-unit-jest"
-              target="_blank"
-              rel="noopener"
-            >
-              unit-jest
-            </a>
-          </li>
-        </ul>
+
         <h3>Essential Links</h3>
-        <ul>
-          <li>
-            <a href="https://vuejs.org" target="_blank" rel="noopener">
-              Core Docs
-            </a>
-          </li>
-          <li>
-            <a href="https://forum.vuejs.org" target="_blank" rel="noopener">
-              Forum
-            </a>
-          </li>
-          <li>
-            <a href="https://chat.vuejs.org" target="_blank" rel="noopener">
-              Community Chat
-            </a>
-          </li>
-          <li>
-            <a href="https://twitter.com/vuejs" target="_blank" rel="noopener">
-              Twitter
-            </a>
-          </li>
-          <li>
-            <a href="https://news.vuejs.org" target="_blank" rel="noopener">
-              News
-            </a>
-          </li>
-        </ul>
         <h3>Ecosystem</h3>
-        <ul>
-          <li>
-            <a href="https://router.vuejs.org" target="_blank" rel="noopener">
-              vue-router
-            </a>
-          </li>
-          <li>
-            <a href="https://vuex.vuejs.org" target="_blank" rel="noopener">
-              vuex
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://github.com/vuejs/vue-devtools#vue-devtools"
-              target="_blank"
-              rel="noopener"
-            >
-              vue-devtools
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://vue-loader.vuejs.org"
-              target="_blank"
-              rel="noopener"
-            >
-              vue-loader
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://github.com/vuejs/awesome-vue"
-              target="_blank"
-              rel="noopener"
-            >
-              awesome-vue
-            </a>
-          </li>
-        </ul>
       </div>
     )
   }
