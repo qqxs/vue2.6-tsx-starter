@@ -17,9 +17,9 @@ export default class Home extends Vue {
             console.log(123412)
           }}
         >
-          1234123
-          <header slot="header">header</header>
-          <footer slot="footer">footer</footer>
+          default slot 1234123
+          <header slot="header">header slot</header>
+          <footer slot="footer">footer slot</footer>
         </v-hello-world>
       </div>
     )
