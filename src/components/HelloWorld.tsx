@@ -27,10 +27,9 @@ export default class HelloWorld extends VueComponent<AProps> {
   @Provide() foo = 'foo'
   @Provide('bar') baz = 'bar'
 
-  @Prop({ type: String }) private href!: string
+  // @Prop({ type: String }) private href!: string
   @Prop({ type: String }) private msg!: string
-  @Prop({ type: String }) private title?: string
-  @Prop({ type: String }) private slot?: any
+  // @Prop({ type: String }) private title?: string
 
   @Model('change', { type: Boolean }) readonly checked!: boolean
 
