@@ -1,5 +1,11 @@
 # vue2.6-tsx-starter
 
+
+
+## example
+
+[demo](./public/demo.png)
+
 ## Project setup
 
 ```
